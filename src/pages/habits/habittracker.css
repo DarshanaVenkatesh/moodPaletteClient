@@ -1,0 +1,122 @@
+.header1 {
+    text-align: center;
+}
+
+.addHabitButton{
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 20px;
+    font-weight: 250;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.habitInput {
+    height: 35px;
+    width: 300px;
+    text-align: center;
+    font-size: medium;
+}
+
+.inputHabit {
+    text-align: center;
+    margin-top: 40px;
+    
+}
+
+.listingHabit {
+    margin: 20px;
+    text-align: center;
+    color: cornflowerblue;
+    font-size: x-large;
+    
+    /* flex: 1; makes everything the same size  */
+    /* display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly; */
+}
+
+
+/* .allHabitsListing {
+    flex-direction: row;
+    justify-content: space-evenly;
+} */
+
+.updateButton{
+    height: 25px;
+    border-radius: 10px;
+    border: none;
+    background-color:darkseagreen;
+    color: white;
+    font-size: 15px;
+    font-weight: 250;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.deleteButton{
+    height: 25px;
+    border-radius: 10px;
+    border: none;
+    background-color:indianred;
+    color: white;
+    font-size: 15px;
+    font-weight: 250;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#HabitError{
+    color: red;
+    text-align: center;
+    padding: 10px;
+    font-size: large;
+}
+
+#HabitErrorPopup{
+    color: red;
+    text-align: center;
+    padding: 10px;
+    font-size: large;
+}
+
+.priorityLevel{
+    margin: 2%;
+}
+
+.frequencyLevel{
+    margin: 2%;
+}
+
+.updateHabit{
+    align-items: center;
+}
+
+.popupFormatting {
+    text-align: center;
+}
+
+.priorityLevelP {
+    margin: 3%
+}
+
+.frequencyLevelP {
+    margin: 3%;
+}
+
+.addHabitButtonP {
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 20px;
+    font-weight: 250;
+    cursor: pointer;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: -10%;
+}

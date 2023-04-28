@@ -1,0 +1,43 @@
+.box {
+  width: 300px;
+  background-color:mediumpurple;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  position:relative;
+  border-radius: 30px;
+}
+
+.sb1:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid mediumpurple;
+  border-top: 10px solid mediumpurple;
+  border-bottom: 10px solid transparent;
+  left: -19px;
+  top: 45px;
+}
+
+a.aStyle {
+  color: #ccc;
+  font-size: 5px;
+  text-align: right;
+}
+
+.quote {
+  float: left;
+  margin-left: -20px;
+}
+
+.cow {
+  margin-left: 35%;
+  float: left;
+}
+
+.cowPic {
+  width: 200px;
+}

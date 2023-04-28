@@ -1,0 +1,15 @@
+.optionContainer li:hover,
+.optionContainer .highlight {
+  background: cornflowerblue;
+  color: #fff;
+}
+/* Ends overriding */
+
+/* Placehoolder Color Change */
+.searchBox#css_custom_input::placeholder {
+  color: cornflowerblue;
+}
+
+.otheroptions {
+    font-size: 30px;
+  }

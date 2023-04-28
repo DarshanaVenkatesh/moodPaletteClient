@@ -1,0 +1,26 @@
+.habits{ /* artists is an array that holds each of the artist objects and its information. this is styling all of the columns as a whole */
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  
+  .habit{ /* artist is each artist on its own (styling each of the artist columns */
+    display: block;
+    align-items: left;
+    text-align: left;
+    justify-content: space-evenly;
+  }
+
+  label {
+    margin-left: 10px;
+    font-size: 20px;
+    display: inline;
+  }
+
+  input[type=checkbox] {
+    display: inline;
+    margin-left:20px;
+  } 
+
+  .loginButton{
+    margin-left: 40px;
+  }

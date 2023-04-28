@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    font-family: 'Raleway',  sans-serif;
+}
+canvas {
+    position: absolute;
+    left: 45px
+}
+
+.emoji-button {
+    text-align: center;
+    font-size: 25px;
+ }
+
+ .calendars {
+    padding: 45px;
+ }

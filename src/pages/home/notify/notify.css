@@ -1,0 +1,37 @@
+.notifyText {
+    text-align: center;
+    font-size: 30px;
+}
+
+.notifyYesBtn:hover {
+    color: #fff;
+    background-color: mediumpurple;
+}
+
+.notifyYesBtn {
+    border: 0;
+    outline: 0;
+    padding: 8px 1em;
+    color: #5A5A5A;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid mediumpurple;
+    transition: all 240ms ease-in-out;
+    cursor: pointer;
+    margin: 5px;
+    margin-right: 10px;
+}
+
+.notifyInnerContainer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.notifyOuterContainer {
+    display: flex;
+    flex-direction: column;
+}

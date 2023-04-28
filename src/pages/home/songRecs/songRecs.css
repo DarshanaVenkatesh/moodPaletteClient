@@ -1,0 +1,60 @@
+.recs 
+{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    height: 150px;
+    margin: auto;
+    width: 50%;
+    margin-top: -20%;
+
+
+  }
+
+  
+  .recsWrapper 
+  {
+    width: 100%;
+    height: 70%;
+    align-items: center;
+    margin:auto;
+  }
+
+  .recsDesc {
+    font-size: 20px;
+  }
+
+  .recsTitle{
+    font-size: 24px;
+  }
+
+  .songButton {
+    border: 0;
+    outline: 0;
+    padding: 8px 1em;
+    color: #5A5A5A;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid darkseagreen;
+    transition: all 240ms ease-in-out;
+    cursor: pointer;
+    margin: 5px;
+    margin-top: -15px;
+    margin-left: 10px;
+  }
+  img {
+    margin-top: 5%;
+    height:150px;
+
+  }
+
+  .songEmbed {
+    display: block;
+    margin-top: auto;
+    margin-right: auto;
+    width: 372;
+  }
