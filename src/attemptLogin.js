@@ -47,7 +47,7 @@ export const loginCall = async (userCredential, dispatch, totalLogins) => {
   if (!isLockedOut) { // try to login ONLY IF the user is not currently in a lockout period
     dispatch({ type: "LOGIN_START" }); 
     try {
-      const res = await axios.post("/auth/login", userCredential);  // call login api call
+      const res = await axios.post("https://mood-palette-api.onrender.com/api/auth/login", userCredential);  // call login api call
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data }); // if valid user, return user object
       lastLockout = 0;
     } catch (err) {

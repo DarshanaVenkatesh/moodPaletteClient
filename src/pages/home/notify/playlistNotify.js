@@ -13,7 +13,7 @@ function PlaylistNotify() {
             try {
                 const currDate = new Date().toDateString()
                 const currMonth = (currDate.split(" "))[1]
-                const res = await axios.get(`/song/getPlaylistId/${user.username}/${currMonth}`);
+                const res = await axios.get(`https://mood-palette-api.onrender.com/api/song/getPlaylistId/${user.username}/${currMonth}`);
                 if (res) {
                     setPlaylistId({id: res.data.playlistId})
                 }
@@ -32,7 +32,7 @@ function PlaylistNotify() {
             };
 
             //update DB
-            await axios.post("/users/updateNotifyFlag", currentUser)
+            await axios.post("https://mood-palette-api.onrender.com/api/users/updateNotifyFlag", currentUser)
         
             // update user object for this page
             user.monthlyNotify = false

@@ -25,7 +25,7 @@ const HabitChecklist = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${currentUser.username}`);
+      const res = await axios.get(`https://mood-palette-api.onrender.com/api/users?username=${currentUser.username}`);
       setUser(res.data);
     };
     fetchUser();
@@ -40,7 +40,7 @@ const HabitChecklist = () => {
       // async function since making api request
       try {
         const res = await axios.get(
-          `day/getCompletedHabits/${currentUser.username}/${date}`
+          `https://mood-palette-api.onrender.com/api/day/getCompletedHabits/${currentUser.username}/${date}`
         ); // have to specify date
         let length = res.data.length;
         setCompHabits(res.data[length - 1].completedHabits);
@@ -81,7 +81,7 @@ const HabitChecklist = () => {
     };
 
     
-    const firstDailyEntry = await axios.get(`day/getChecklist/${currentUser.username}/${date}`);
+    const firstDailyEntry = await axios.get(`https://mood-palette-api.onrender.com/api/day/getChecklist/${currentUser.username}/${date}`);
    // console.log("firstDailyEntry: ", firstDailyEntry.data[0].completedHabits.length);
     let updateMoolah = false;
     if(firstDailyEntry.data.length == 0){
@@ -91,10 +91,10 @@ const HabitChecklist = () => {
     }*/
      
     
-    const res = await axios.delete(`day/deleteUpdateHack/${currentUser.username}/${date}`);
+    const res = await axios.delete(`https://mood-palette-api.onrender.com/api/day/deleteUpdateHack/${currentUser.username}/${date}`);
 		console.log("delete res", res)
   
-    await axios.post("/day/addCompletedHabits", habitsLog);
+    await axios.post("https://mood-palette-api.onrender.com/api/day/addCompletedHabits", habitsLog);
     console.log("array lengths", habits.length, completedHabits.length);
     //if (habits.length === completedHabits.length) {
       
@@ -103,7 +103,7 @@ const HabitChecklist = () => {
         mooLahs = mooLahs+5;
         // update user
         try {
-          axios.put("/users/" + user._id, { mooLahs: mooLahs });
+          axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, { mooLahs: mooLahs });
           // update local storage
       
            // update user object for this page

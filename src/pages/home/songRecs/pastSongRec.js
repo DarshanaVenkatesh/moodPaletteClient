@@ -19,7 +19,7 @@ function PastSongRecs() {
   const getSongDB = async () => {
     try {
         const res = await axios.get(
-          `/song/getSongID/${user.username}/${currDate}`
+          `https://mood-palette-api.onrender.com/api/song/getSongID/${user.username}/${currDate}`
           );
         console.log("ATTEMPT " , res.data[0].songId);
         if (typeof res.data[0].songId !== 'undefined') {

@@ -81,7 +81,7 @@ function OutfitCard(props) {
     mooLahs = mooLahs-amt;
     // update user
     try {
-      axios.put("/users/" + user._id, { mooLahs: mooLahs });
+      axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, { mooLahs: mooLahs });
       // update local storage
   
         // update user object for this page
@@ -122,7 +122,7 @@ function OutfitCard(props) {
     };
 
     //update DB
-    await axios.post("/users/addOutfitToInventory", newOutfit)
+    await axios.post("https://mood-palette-api.onrender.com/api/users/addOutfitToInventory", newOutfit)
 
     // update user object for this page
     user.outfitInventory.push(inventoryOutfitIndex)
@@ -175,7 +175,7 @@ function OutfitCard(props) {
     };
 
     //update DB
-    await axios.post("/users/updateCurrentOutfit", currentOutfit)
+    await axios.post("https://mood-palette-api.onrender.com/api/users/updateCurrentOutfit", currentOutfit)
 
     // update user object for this page
     user.mooPalOutfit = currentOutfitIndex

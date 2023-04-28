@@ -35,7 +35,7 @@ function CalendarHeatmap() {
                     //console.log(getDateString(j + i*7))
                     const dateString = getDateString(j + i*7);
                     if (dateString !== "") {
-                        const res = await axios.get(`day/getDailyData/${user.username}/${dateString}`)
+                        const res = await axios.get(`https://mood-palette-api.onrender.com/api/day/getDailyData/${user.username}/${dateString}`)
                         let numCompleted = 0;
                         let numTotal = 0;
                         for (var k = 0; k < res.data.length; k++) {
