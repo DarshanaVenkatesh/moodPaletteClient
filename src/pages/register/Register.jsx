@@ -143,7 +143,7 @@ export default function Register() {
       };
       console.log("user: ", user);
       try {
-        await axios.post("/auth/register", user);
+        await axios.post("https://mood-palette-api.onrender.com/api/auth/register", user);
         navigate("/login");
       } catch (err) {
         console.log(err);

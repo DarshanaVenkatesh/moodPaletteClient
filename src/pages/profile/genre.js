@@ -19,7 +19,7 @@ function SpotifyGenres() {
     }, []);
 
     async function fetchSpotifyGenres() {
-        const res = await axios.get("/spotify/fetchAccessToken", {})
+        const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
         .then((res1) => {
             spotifyApi.setAccessToken(res1.data.accessToken);
             spotifyApi.getAvailableGenreSeeds().then((res2) => {
@@ -42,7 +42,7 @@ function SpotifyGenres() {
     }
 
     async function fetchUserGenres() {
-        const res = await axios.get(`/users/pullGenres/${user.username}`)
+        const res = await axios.get(`https://mood-palette-api.onrender.com/api/users/pullGenres/${user.username}`)
         .then((res) => {
             var returnedGenres = res.data;
             var preChosenGenres = [];
@@ -72,7 +72,7 @@ function SpotifyGenres() {
             document.getElementById("genreLimitError").innerHTML = "You can only add up to 5 preferred genres";
         }
       
-        await axios.post("/users/addGenre", addGenre);
+        await axios.post("https://mood-palette-api.onrender.com/api/users/addGenre", addGenre);
     }
     
     async function onRemove(selectedList, removedItem) {
@@ -83,7 +83,7 @@ function SpotifyGenres() {
       
         document.getElementById("genreLimitError").innerHTML = "";
 
-        await axios.post("/users/deleteGenre", deleteGenre);
+        await axios.post("https://mood-palette-api.onrender.com/api/users/deleteGenre", deleteGenre);
     }
 
     return (

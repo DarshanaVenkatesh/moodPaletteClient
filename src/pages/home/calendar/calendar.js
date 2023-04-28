@@ -65,9 +65,9 @@ const [currRec, setCurrRec] = useState("");
 
 const getUserData = async (e) => {
   console.log("DATE:", date.toDateString());
-  const res = await axios.get(`day/getDailyData/${user.username}/${date.toDateString()}`)
+  const res = await axios.get(`https://mood-palette-api.onrender.com/api/day/getDailyData/${user.username}/${date.toDateString()}`)
   
-  const song = await axios.get(`/song/getSongID/${user.username}/${clickedDate.toDateString()}`);
+  const song = await axios.get(`https://mood-palette-api.onrender.com/api/song/getSongID/${user.username}/${clickedDate.toDateString()}`);
   console.log("song res", song);
   setCurrRec(song.data.songId);
 
@@ -122,7 +122,7 @@ const handleSubmit = async (e) => {
         setOpenPast(true);
         console.log(apiData);
         // submit data into db
-        await axios.post("/day/addDayInputs", apiData).then((response) => {
+        await axios.post("https://mood-palette-api.onrender.com/api/day/addDayInputs", apiData).then((response) => {
           console.log(response.data);
           // handle successful response
         })
@@ -175,7 +175,7 @@ const handleMooLahs = async (e) => {
           mooLahs = mooLahs+5;
           // update user
           try {
-            axios.put("/users/" + user._id, { mooLahs: mooLahs });
+            axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, { mooLahs: mooLahs });
             // update local storage
         
              // update user object for this page

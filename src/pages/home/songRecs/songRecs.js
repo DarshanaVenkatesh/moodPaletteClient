@@ -27,7 +27,7 @@ function SongRecs() {
         try {
             const currDate = new Date().toDateString()
             const currMonth = (currDate.split(" "))[1]
-            const res = await axios.get(`/song/getPlaylistId/${user.username}/${currMonth}`);
+            const res = await axios.get(`https://mood-palette-api.onrender.com/api/song/getPlaylistId/${user.username}/${currMonth}`);
             if (res) {
                 setPlaylistID({id: res.data.playlistId})
             }
@@ -43,7 +43,7 @@ function SongRecs() {
   const getSongDB = async () => {
     try {
         const res = await axios.get(
-          `/song/getSongID/${user.username}/${currDate}`
+          `https://mood-palette-api.onrender.com/api/song/getSongID/${user.username}/${currDate}`
           );
         //console.log("ATTEMPT " , res.data[0].songId);
         if (typeof res.data[0].songId !== 'undefined') {
@@ -69,9 +69,9 @@ function SongRecs() {
         playlistId: playlistID.id
       };
      // console.log("PLAYLIST TEST B4", playlistID.id);
-      const res = await axios.delete(`song/deleteSongHack/${user.username}/${currDate}`);
+      const res = await axios.delete(`https://mood-palette-api.onrender.com/api/song/deleteSongHack/${user.username}/${currDate}`);
 		  //console.log(res)
-      await axios.post("/song/addSongID", inp).then((response) => {
+      await axios.post("https://mood-palette-api.onrender.com/api/song/addSongID", inp).then((response) => {
         //console.log(response.data);
         //handle successful response
       })
@@ -91,7 +91,7 @@ function SongRecs() {
       songId: currRec.id
     };
        
-    const res = await axios.get("/spotify/fetchAccessToken", {})
+    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken);
       var playlistName = user.username + "'s Monthly Spotify Playlist"
@@ -128,7 +128,7 @@ function SongRecs() {
   const addTrackToPlaylist = async () => {
     //SongDB();
     console.log("ADDING", currRec.id);
-    const res = await axios.get("/spotify/fetchAccessToken", {})
+    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken); 
       return spotifyApi.addTracksToPlaylist(playlistID.id, 
@@ -143,7 +143,7 @@ function SongRecs() {
   const deleteTrackFromPlaylist = async () => {
     console.log("DELETING", currRec.id);
     
-    const res = await axios.get("/spotify/fetchAccessToken", {})
+    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken); 
       return spotifyApi.removeTracksFromPlaylist(playlistID.id,  
@@ -160,7 +160,7 @@ function SongRecs() {
 
   const getRecs = async () => {
     
-    const res = await axios.get("/spotify/fetchAccessToken", {})
+    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken);
       return spotifyApi.getRecommendations({

@@ -82,7 +82,7 @@ export default function Profile() {
      console.log("username entered", username.current.value)
 	if (username.current.value.length !== 0) {
 		try {
-			axios.put("/users/" + user._id, {
+			axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, {
 				username: username.current.value
 			});
 		} catch (err) {
@@ -92,7 +92,7 @@ export default function Profile() {
 
 	if (email.current.value.length !== 0) {
 		try {
-			axios.put("/users/" + user._id, { email: email.current.value });
+			axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, { email: email.current.value });
 		} catch (err) {
 			console.log("error with editing email");
 		}
@@ -100,7 +100,7 @@ export default function Profile() {
 
 	if (age.current.value.length !== 0) {
 		try {
-			axios.put("/users/" + user._id, { age: age.current.value });
+			axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, { age: age.current.value });
 		} catch (err) {
 			console.log("error with editing age");
 		}
@@ -115,7 +115,7 @@ export default function Profile() {
   const handleDelete = async (e) => {
 	e.preventDefault();
 	try {
-		const res = await axios.delete(`/users/${user._id}`);
+		const res = await axios.delete(`https://mood-palette-api.onrender.com/api/users/${user._id}`);
 		console.log(res)
 		
 		dispatch({type:"LOGOUT", payload: user})
@@ -155,7 +155,7 @@ export default function Profile() {
 
 
   const getRecs = async () => {
-    const res = await axios.get("/spotify/fetchAccessToken", {})
+    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken);
       return spotifyApi.getRecommendations({
