@@ -163,12 +163,16 @@ const HabitChecklist = () => {
               {habits.map((habit) => (
                 (habit.substring(1, 4) === "Day" ||
                 habit.substring(1, 4) ===
-                  new Date().toDateString().split(" ")[0]) && (<div className="habit" key={habit}>
-                  <input type="checkbox" defaultChecked={dbCompletedHabits.includes(habit)}/>
-                  <label>{habit.substring(4)}</label>
-                </div>)
+                  new Date().toDateString().split(" ")[0]) ? 
+                  (<div className="habit" key={habit}>
+                    <input type="checkbox" defaultChecked={dbCompletedHabits.includes(habit)}/>
+                    <label>{habit.substring(4)}</label>
+                  </div>):
+                  (<div className="habit" key={habit}>
+                    <input type="checkbox" disabled="true" defaultChecked={dbCompletedHabits.includes(habit)}/>
+                    <label>{habit.substring(4)} ({habit.substring(1,4)})</label>
+                  </div>)
               ))}
-            
             </div>
 
             <br></br>
