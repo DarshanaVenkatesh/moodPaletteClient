@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Calendar from 'react-calendar'; 
 import 'react-calendar/dist/Calendar.css'
 import React from 'react';
@@ -12,6 +12,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { ChromePicker } from 'react-color'
 import axios from "axios";
+import SongRecs from "../songRecs/songRecs";
 
 
 
@@ -38,10 +39,11 @@ const {user} = useContext(AuthContext)
  const [emotion, setEmotion] = useState("");
  //to save text within the textbox- for journal
  const [journal, setText] = useState("");
+ const [clickedDate, setClickedDate] = useState(new Date());
  //to store the retrieved data
 
 const [currRec, setCurrRec] = useState("");
- const [clickedDate, setClickedDate] = useState(new Date());
+ //const [clickedDate, setClickedDate] = useState(new Date());
 
  const notify = () => {
   toast("Loading 5 MooLahs into your account for completing your daily entry!");
@@ -64,13 +66,13 @@ const [currRec, setCurrRec] = useState("");
 
 
 const getUserData = async (e) => {
+
   console.log("DATE:", date.toDateString());
-  const res = await axios.get(`https://mood-palette-api.onrender.com/api/day/getDailyData/${user.username}/${date.toDateString()}`)
-  
-  const song = await axios.get(`https://mood-palette-api.onrender.com/api/song/getSongID/${user.username}/${clickedDate.toDateString()}`);
+  const res = await axios.get(`day/getDailyData/${user.username}/${date.toDateString()}`)
+  const song = await axios.get(`/song/getSongID/${user.username}/${clickedDate.toDateString()}`);
   console.log("song res", song);
   setCurrRec(song.data.songId);
-
+  console.log("is this printing songid?" , currRec);
   console.log("inside getUserData");
   let latestres = 'undefined';
   let foundData = false
@@ -122,7 +124,7 @@ const handleSubmit = async (e) => {
         setOpenPast(true);
         console.log(apiData);
         // submit data into db
-        await axios.post("https://mood-palette-api.onrender.com/api/day/addDayInputs", apiData).then((response) => {
+        await axios.post("/day/addDayInputs", apiData).then((response) => {
           console.log(response.data);
           // handle successful response
         })
@@ -145,6 +147,9 @@ const handleSubmit = async (e) => {
   setClickedDate(clickedDate);
   console.log("Clicked Date", clickedDate)
   getUserData();
+  setClickedDate(clickedDate);
+  console.log("Clicked Date", clickedDate)
+  getUserData();
   if (clickedDate.toDateString() === new Date().toDateString()) {
     getUserData();
     setOpen(true);
@@ -153,16 +158,6 @@ const handleSubmit = async (e) => {
     setDate(clickedDate);
     setOpenPast(true);
   }
-
-  // set apiData with the data you want to send to the API
-  // setApiData({
-  //   username: user.username,
-  //   date: clickedDate.toDateString(),
-  //   color: color.hex,
-  //   vibe: vibe,
-  //   journal: journal,
-  //   emotion: emotion,
-  // });
 };
 
 const handleMooLahs = async (e) => {
@@ -175,7 +170,7 @@ const handleMooLahs = async (e) => {
           mooLahs = mooLahs+5;
           // update user
           try {
-            axios.put("https://mood-palette-api.onrender.com/api/users/" + user._id, { mooLahs: mooLahs });
+            axios.put("/users/" + user._id, { mooLahs: mooLahs });
             // update local storage
         
              // update user object for this page
@@ -229,7 +224,24 @@ const marks = [
   { value: 100, label: '100' },
 ];
 
+//const [currRec, setCurrRec] = useState("");
 
+/*
+useEffect(() => {
+  async function getSongID() {
+      try {
+        const currDate = new Date().toDateString()
+          const res = await axios.get(`/song/getSongID/${user.username}/${currDate}`);
+          if (res) {
+            console.log("CURRDATE", res.data.getSongID);
+            setCurrRec({id: res.data.getSongID})
+          }
+      } catch (err) {
+        console.log(err.response.data);
+      }
+  }
+  getSongID();
+},[])*/
 
 return (
  <div className="app">
@@ -291,11 +303,18 @@ return (
           <p>Vibe Meter: {userData.vibe} </p><br></br>
           <p>Journal: {userData.journal} </p><br></br>
           <p>Emotion: {userData.emotion} </p><br></br>
-
-          <p>Song of the Day!:  </p><br></br>
-          <p>{currRec}</p>
           
+          <p>Song of the Day!:  </p><br></br>
+          <p></p>
+          { (clickedDate.toDateString() === new Date().toDateString()) ? (
+
+              <SongRecs></SongRecs>
+          ) : (
+           
                   <iframe className="songEmbed" src= {"https://open.spotify.com/embed/track/" + currRec + "?utm_source=generator"} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>             
+          )}     
+         <br></br>
+          
                   
          
          

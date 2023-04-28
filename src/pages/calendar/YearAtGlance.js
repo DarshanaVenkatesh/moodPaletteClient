@@ -22,7 +22,7 @@ function App() {
                 context.fillStyle = "#" + (0xffffff).toString(16).slice(0, 6);
                 if (day !== "") {
                     try {
-                        const res = await axios.get(`https://mood-palette-api.onrender.com/api/day/getDailyData/${currentUser.username}/${getDateString(j*7 + i)}`)
+                        const res = await axios.get(`day/getDailyData/${currentUser.username}/${getDateString(j*7 + i)}`)
                         for (let k = 0; k < res.data.length; k++) {
                             if (res.data[k].color) {
                                 context.fillStyle = res.data[k].color;
@@ -93,7 +93,7 @@ function App() {
                 let day = getDateString(i*7 + j);
                 if (day !== "") {
                     try {
-                        const res = await axios.get(`https://mood-palette-api.onrender.com/api/day/getDailyData/${currentUser.username}/${getDateString(i*7 + j)}`)
+                        const res = await axios.get(`day/getDailyData/${currentUser.username}/${getDateString(i*7 + j)}`)
                         const latestres = res.data[res.data.length - 1];
                         if (typeof latestres !== 'undefined') {
                             //console.log(latestres)

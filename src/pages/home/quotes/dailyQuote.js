@@ -33,7 +33,7 @@ function GetDailyQuote() {
     pullDailyQuote();
 
     async function pullDailyQuote() {
-        const res = await axios.get("https://mood-palette-api.onrender.com/api/quote/fetchDailyQuote", {})
+        const res = await axios.get("/quote/fetchDailyQuote", {})
         setQuote(res.data.quote_text)
         setAuthor(res.data.quote_author)
     }

@@ -19,7 +19,7 @@ function SpotifyAuth() {
 
                 if (stateValue === STATE && codeKey === "code") {
                     try {
-                        axios.post("https://mood-palette-api.onrender.com/api/spotify/generateAccessToken", { code : codeValue });
+                        axios.post("/spotify/generateAccessToken", { code : codeValue });
                     } catch (err) {
                         console.log(err);
                     }

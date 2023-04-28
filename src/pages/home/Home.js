@@ -42,9 +42,6 @@ export default function Home() {
         </div>
         { <PlaylistNotify></PlaylistNotify> }
         { <GetDailyQuote></GetDailyQuote> }
-        <center>
-        { <SongRecs></SongRecs> }    
-        </center>
         <div className="helpButton" onMouseOver={displayHelp} onMouseOut={displayQuestion}>{helpText}</div>
     </div> 
   )

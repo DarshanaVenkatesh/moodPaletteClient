@@ -76,9 +76,9 @@ const HabitTracker = () => {
 
     console.log(priority.current.value);
 
-    await axios.post("https://mood-palette-api.onrender.com/api/users/addHabit", addHabit); // call login api call, asccessing the req.body.habit in users.j
+    await axios.post("/users/addHabit", addHabit); // call login api call, asccessing the req.body.habit in users.j
 
-    const res = await axios.get(`https://mood-palette-api.onrender.com/api/users/${user._id}`);
+    const res = await axios.get(`/users/${user._id}`);
 
     console.log("res.data", res.data);
     //setUser(res.data);
@@ -105,12 +105,12 @@ const HabitTracker = () => {
       date: new Date().toDateString(),
     };
 
-    const test = await axios.post("https://mood-palette-api.onrender.com/api/users/deleteHabit", deleteHabit);
+    const test = await axios.post("/users/deleteHabit", deleteHabit);
     console.log("test", test);
-    const test1 = await axios.post("https://mood-palette-api.onrender.com/api/day/deleteHabit", deleteDayHabit);
+    const test1 = await axios.post("/day/deleteHabit", deleteDayHabit);
     console.log("test1", test1); //deleting from days object
 
-    const res = await axios.get(`https://mood-palette-api.onrender.com/api/users/${user._id}`);
+    const res = await axios.get(`/users/${user._id}`);
 
     //const res1 = await axios.get(`/day/${user._id}/${new Date().toDateString}`);
 
@@ -144,7 +144,7 @@ const HabitTracker = () => {
     };
     console.log(deleteHabit)
 
-    await axios.post("https://mood-palette-api.onrender.com/api/users/deleteHabit", deleteHabit);
+    await axios.post("/users/deleteHabit", deleteHabit);
 
     
     const concatHabit = priority1.current.value + frequency1.current.value + popupHabit;
@@ -155,9 +155,9 @@ const HabitTracker = () => {
       habit: concatHabit,
     };
 
-    await axios.post("https://mood-palette-api.onrender.com/api/users/addHabit", addHabit); // call login api call, asccessing the req.body.habit in users.
+    await axios.post("/users/addHabit", addHabit); // call login api call, asccessing the req.body.habit in users.
 
-    const res = await axios.get(`https://mood-palette-api.onrender.com/api/users/${user._id}`);
+    const res = await axios.get(`/users/${user._id}`);
     console.log("res.data", res.data);
     localStorage.setItem("user", JSON.stringify(res.data));
     window.location.reload(false);

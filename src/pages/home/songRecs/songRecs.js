@@ -27,7 +27,7 @@ function SongRecs() {
         try {
             const currDate = new Date().toDateString()
             const currMonth = (currDate.split(" "))[1]
-            const res = await axios.get(`https://mood-palette-api.onrender.com/api/song/getPlaylistId/${user.username}/${currMonth}`);
+            const res = await axios.get(`/song/getPlaylistId/${user.username}/${currMonth}`);
             if (res) {
                 setPlaylistID({id: res.data.playlistId})
             }
@@ -43,7 +43,7 @@ function SongRecs() {
   const getSongDB = async () => {
     try {
         const res = await axios.get(
-          `https://mood-palette-api.onrender.com/api/song/getSongID/${user.username}/${currDate}`
+          `/song/getSongID/${user.username}/${currDate}`
           );
         //console.log("ATTEMPT " , res.data[0].songId);
         if (typeof res.data[0].songId !== 'undefined') {
@@ -60,7 +60,6 @@ function SongRecs() {
   
   const SongDB = async (e) => {
     try {
-      //console.log("THIS IS SO DUMB",currRec.id);
       const inp = {
         username: user.username,
         songId: currRec.id,
@@ -68,17 +67,11 @@ function SongRecs() {
         date: currDate,
         playlistId: playlistID.id
       };
-     // console.log("PLAYLIST TEST B4", playlistID.id);
-      const res = await axios.delete(`https://mood-palette-api.onrender.com/api/song/deleteSongHack/${user.username}/${currDate}`);
-		  //console.log(res)
-      await axios.post("https://mood-palette-api.onrender.com/api/song/addSongID", inp).then((response) => {
-        //console.log(response.data);
-        //handle successful response
+      const res = await axios.delete(`song/deleteSongHack/${user.username}/${currDate}`);
+      await axios.post("/song/addSongID", inp).then((response) => {
       })
       .catch((error) => {
-        //console.error(error);
         console.log(error);
-        // handle error response
       });
     } catch(err) {
       console.log(err.response.data)
@@ -91,7 +84,7 @@ function SongRecs() {
       songId: currRec.id
     };
        
-    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
+    const res = await axios.get("/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken);
       var playlistName = user.username + "'s Monthly Spotify Playlist"
@@ -128,7 +121,7 @@ function SongRecs() {
   const addTrackToPlaylist = async () => {
     //SongDB();
     console.log("ADDING", currRec.id);
-    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
+    const res = await axios.get("/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken); 
       return spotifyApi.addTracksToPlaylist(playlistID.id, 
@@ -143,7 +136,7 @@ function SongRecs() {
   const deleteTrackFromPlaylist = async () => {
     console.log("DELETING", currRec.id);
     
-    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
+    const res = await axios.get("/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken); 
       return spotifyApi.removeTracksFromPlaylist(playlistID.id,  
@@ -160,7 +153,7 @@ function SongRecs() {
 
   const getRecs = async () => {
     
-    const res = await axios.get("https://mood-palette-api.onrender.com/api/spotify/fetchAccessToken", {})
+    const res = await axios.get("/spotify/fetchAccessToken", {})
     .then((res) => {
       spotifyApi.setAccessToken(res.data.accessToken);
       return spotifyApi.getRecommendations({
@@ -172,7 +165,7 @@ function SongRecs() {
       }).then((response) => {    
       console.log("THIS IS MY REC:", response)
           const dateMonth = new Date().getMonth();
-          if (month != dateMonth) {
+          if (playlistID === undefined) {
             newPlaylist();
             //add playlist to db
             //month = dateMonth; //TODO change to db var
@@ -190,7 +183,9 @@ function SongRecs() {
             uri: response.tracks[0].uri
           })
           SongDB();
-          //getSongDB();
+          getSongDB();
+          setTimeout(5000);
+          //setCurrRec()
           update = true;
           addTrackToPlaylist();
         try {
@@ -223,37 +218,22 @@ function SongRecs() {
                 <br/> */}
                 <div className="recsRight"></div>
                 <div className="song" value={currRec.id} data-hide-if="">
-                  <br/> <br/> <br/>
+                  <br/> 
                   <br/> 
                  
-                  {currRec.id == undefined ? (
+                 { currRec === "" ? (
+                    <button className="songButton" onClick={getRecs}> Generate Song From your Input!         
+                    </button>
+                 ):(
                   <div>
-                    <button className="songButton" onClick={getRecs}>Song of the Day!         
-                </button>
-                  </div>
-              ) : (
-                <div>
-                  <button className="songButton" onClick={getRecs}>Generate a New Song of the Day!         
-                  </button>
-                  <br/> <br/> <br/>
-                  <br/> 
+                  <button className="songButton" onClick={getRecs}> Generate Song From your Input!  </button> <br/> <br/>       
+  
+                  <p>{() => {setTimeout(5000)}}</p>
                   <iframe className="songEmbed" src= {"https://open.spotify.com/embed/track/" + currRec.id + "?utm_source=generator"} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>             
                   <br/> <br/>
-                </div>
-                  )}
-                  
-                  {playlistID.id == undefined ? (
-                  <div>
                   </div>
-              ) : (
-                <div>
-                  <iframe src={"https://open.spotify.com/embed/playlist/" + playlistID.id + "?utm_source=generator"} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-                </div>
-                  )}
-
-                  <br/> <br/>
-                  <br/> <br/> <br/>
+                 )}
+        
                 </div>
         </div>
     </div>
